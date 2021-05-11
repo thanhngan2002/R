@@ -1,12 +1,12 @@
 setwd("C://Users//Admin//Downloads")
-Owls<-read.table(file = "Owls.txt", header = TRUE, dec = ".")# �???c d??ng �???u ti�n trong file
-names(Owls)# H???i trong c???t d??? li???u c� nh???ng c???t n�o v� t�n g??
-str(Owls) # Ki???m tra �???nh d???ng c�c bi???n trong Owls
-unique(Owls$Nest) # Tr�ch xu???t d??? li???u t??? Nest
+Owls<-read.table(file = "Owls.txt", header = TRUE, dec = ".")# Đọc dòng đầu tiên trong file
+names(Owls)# Hỏi trong cột dữ liệu có những cột nào và tên gì
+str(Owls) # Kiểm tra định dạng các biến trong Owls
+unique(Owls$Nest) # Trích xuất dữ liệu từ Nest
 
 AllNests<- unique(Owls$Nest)
-for (i in 1:27) # D�ng v??ng l???p for trong c�c gi� tr??? t??? 1 �???n 27
-  Nest.i <- AllNests[i]# �???t Nest.i b???ng AllNest 
+for (i in 1:27) # Dùng vòng lặp for trong các giá trị từ 1 đến 27
+  Nest.i <- AllNests[i]# Đặt Nest.i bằng AllNest
   Owls.i<- Owls[Owls$Nest==Nest.i,]
   YourFileName<-paste(Nest.i, ".jpg",sep = "")
   jpeg(file=YourFileName)
@@ -20,4 +20,4 @@ for (i in 1:27) # D�ng v??ng l???p for trong c�c gi� tr??? t??? 1 �???n 27
 ifelse(Owls$FoodTreatment == "Satiated",
        Owls$NestNight <- paste(Owls$Nest, "1",sep = "_"),
        Owls$NestNight <- paste(Owls$Nest, "2",sep = "_"))
-# T???o m???t bi???n ph�n lo???i m???i x�c �???nh c�c quan s�t t??? m???t ��m duy nh???t t???i m???t t??? c??? th???.
+# Tạo một biến phân loại mới xác định các quan sát từ một đêm duy nhất tại một tổ cụ thể.
