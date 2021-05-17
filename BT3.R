@@ -1,35 +1,37 @@
-# Thi???t l???p th� m???c hi???n h�nh
+#Thiết lập thư mục hiện hành
 setwd("C://Users//Admin//Downloads")
 #RIKZ.txt
 Benthic <- read.table('RIKZ.txt', header = TRUE)
 names(Benthic)
 str(Benthic)
-# Bi???n Species (lo�i) t??? c???t th??? 3 d???n 76 trong bi???n Benthic
+#Biến Species (loài) từ cột thứ 2 đến 76 trong biến Benthic
 Species <- Benthic[,2:76]
 names(Species)
 str(Species)
-# Ki???m tra dimensions - chi???u c???a bi???n Species
+#Kiểm tra dimensions - chiều của biến Species
 n <- dim(Species)
 n
-# 45 d??ng - t��ng ???ng v???i 45 site - v??? tr� thu th???p m???u v???t
-# T��ng ???ng v???i m???i v??? tr� th?? s??? ghi nh???n ��???c nh???ng lo�i sinh v???t bi???n n�o?
-# C� bao nhi�u lo�i sinh v???t bi???n ???e v??? tr� s??? 1
+# 45 dòng - tương ứng với 45 sites - vị trí thu thập mẫu vật
+# Tương ứng với mỗi vị trí thì sẽ ghi nhận được những loài
+#sinh vật biển nào?
+#Có bao nhiêu loài sinh vật biển ở vị trí số 1
 sum(Species[1,], na.rm = TRUE)
-# K???t qu??? 143 lo�i sinh v???t bi???n xu???t hi???n ??? site #1
+#Kết quả 143 loài sinh vật biển xuất hiện ở site #1
 sum(Species[2,], na.rm = TRUE)
-# ... L�m 45 l???n �??? ki???m tra s??? l�???ng sinhh v???t bi???n xu???t hi???n t???i c�c sites
+#... Làm 45 lần để kiểm tra số lượng sinh vật biển
+#xuất hiện tại các sites
 TA <- vector(length = n[1])
 for (i in 1:n[1]){
   TA[i] <- sum(Species[i,], na.rm = TRUE)
 }
 TA
-#H�m rowSums: t�nh to�n t???ng c???a c�c c???t ??? trong b???ng
-# Tham s??? na.rm =  TRUE => lo???i b??? c�c gi� tr??? r???ng
+#Hàm rowSums: tính toán tổng của các cột ở trong hàng
+#tham số na.rm=TRUE => Loại bỏ các giá trị rỗng
 TA02 <- rowSums(Species,na.rm = TRUE)
 TA02
-# �i v�o chi ti???t t???i t???ng v??? tr� quan s�t
+# #Đi vào chi tiết tại từng vị trí quan sát
 sum(Species[1,]>0, na.rm = TRUE)
-# K???t qu??? ch�ng ta c� 11 lo�i kh�c nhau t???i v??? tr� 1
+#Kết quả chúng ta có 11 loài khác nhau xuất hiện tại vị trí 1
 Richness <- vector(length = n[1])
 for (i in 1:n[1]){
   Richness[i] <- sum(Species[i,]>0, na.rm = TRUE)
@@ -39,16 +41,16 @@ Richness
 Richness02 <- rowSums(Species>0, na.rm = TRUE)
 Richness02
 
-# Ch??? s??? �a d???ng lo�i
+# Chỉ số đa dạng loài
 #https://en.wikipedia.org/wiki/Diversity_index
-#T??m hi???u c�ch t�nh ch??? s??? �a d???ng lo�i
-#H - sum bi???n ch???y t??? i -> m c???a bi???n p: x�c xu???t * log10 p
+#Tìm hiểu cách tính chỉ số đa dạng loài
+#H - sum biến chạy từ i -> m của biến p: xác xuất * log10 p
 RS <- rowSums(Species, na.rm=TRUE)
 prop <- Species / RS
 H <- -rowSums(prop * log10(prop), na.rm= TRUE)
 H
-# K???t h???p l???i h???t nh???ng g?? �?? l�m v� 1 h�m c???a ri�ng m??nh
-# sau n�y s??? d???ng l???i �??? ph�n t�ch nh???ng d??? li???u t��ng t???
+# Kết hợp lại hết những gì đã làm vô 1 hàm của riêng mình
+# sau này sử dụng lại để phân tích những dữ liệu tương tự
 Index.function <-function(Spec, Choice){
   if (Choice=="Richness") {
     Index <- rowSums(Species>0, na.rm = TRUE)
