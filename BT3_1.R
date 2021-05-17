@@ -2,11 +2,11 @@ setwd("C://Users//Admin//Downloads")
 DS <- read.table('Vegetation2.txt', header = TRUE)
 names(DS)
 str(DS)
-# Bi???n Species (lo�i) t??? c???t th??? 3 d???n 76 trong bi???n DS
+#Biến Species (loài) từ cột thứ 2 đến 76 trong biến DS
 Species <- DS[,5:9]
 names(Species)
 str(Species)
-# Ki???m tra dimensions - chi???u c???a bi???n Species
+#Kiểm tra dimensions - chiều của biến Species
 n <- dim(Species)
 n
 sum(Species[1,], na.rm = TRUE)
@@ -17,11 +17,11 @@ for (i in 1:n[1]){
   TA[i] <- sum(Species[i,], na.rm = TRUE)
 }
 TA
-#H�m rowSums: t�nh to�n t???ng c???a c�c c???t ??? trong b???ng
-# Tham s??? na.rm =  TRUE => lo???i b??? c�c gi� tr??? r???ng
+#Hàm rowSums: tính toán tổng của các cột ở trong hàng
+#tham số na.rm=TRUE => Loại bỏ các giá trị rỗng
 TA02 <- rowSums(Species,na.rm = TRUE)
 TA02
-# �i v�o chi ti???t t???i t???ng v??? tr� quan s�t
+#Đi vào chi tiết tại từng vị trí quan sát
 sum(Species[1,]>0, na.rm = TRUE)
 Richness <- vector(length = n[1])
 for (i in 1:n[1]){
@@ -31,13 +31,13 @@ Richness
 
 Richness02 <- rowSums(Species>0, na.rm = TRUE)
 Richness02
-# Ch??? s??? �a d???ng lo�i
-#H - sum bi???n ch???y t??? i -> m c???a bi???n p: x�c xu???t * log10 p
+# Chỉ số đa dạng loài
+#H - sum biến chạy từ i -> m của biến p: xác xuất * log10 p
 RS <- rowSums(Species, na.rm=TRUE)
 prop <- Species / RS
 H <- -rowSums(prop * log10(prop), na.rm= TRUE)
 H
-# K???t h???p l???i h???t nh???ng g?? �?? l�m v� 1 h�m 
+# Kết hợp lại hết những gì đã làm vô 1 hàm 
 Index.function <-function(Spec, Choice){
   if (Choice=="Richness") {
     Index <- rowSums(Species>0, na.rm = TRUE)
@@ -57,4 +57,6 @@ Index.function <-function(Spec, Choice){
 Index.function(Species,"Shannon")
 Index.function(Species,"Total Abundance")
 Index.function(Species,"Richness")
+
+
 
