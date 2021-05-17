@@ -2,7 +2,7 @@ setwd("C://Users//Admin//Downloads")
 DS <- read.table('Vegetation2.txt', header = TRUE)
 names(DS)
 str(DS)
-#Biến Species (loài) từ cột thứ 2 đến 76 trong biến DS
+#Biến Species (loài) từ cột thứ 5 đến 9 trong biến DS
 Species <- DS[,5:9]
 names(Species)
 str(Species)
