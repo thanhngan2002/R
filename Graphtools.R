@@ -8,11 +8,11 @@ Cases =rowSums(BFCases[,2:16])
 names(Cases)=BFCases[,1]
 Cases
 par(mfrow=c(2,2),mar=c(3,3,2,1))
-pie(Cases,main="Ch???t m???i n�m")
+pie(Cases,main="Chết mỗi năm")
 #b
 Cases1=colSums(BFCases[2:16],na.rm=TRUE)
 Cases1
-pie(Cases1,main="Ch???t m???i qu???c gia")
+pie(Cases1,main="Chết mỗi quốc gia")
 #Bai Tap 2
 veg = read.table('vegetation2.txt',header=TRUE)
 veg.M <-tapply(veg$R, 
@@ -40,7 +40,7 @@ veg.le <- tapply(veg$R,
                  INDEX=veg$Transect,
                  FUN=length)
 #se= standard error= 
-#�??? l???ch chu???n / c�n b???c hai c???a k�ch th�???c m???u
+#độ lệch chuẩn / căn bậc hai của kích thước mẫu
 #
 veg.se <- veg.sd/sqrt(veg.le)
 veg.se
